@@ -55,7 +55,7 @@ export default class extends StatefulComponent {
     }
 
     onMount() {
-        this.router = new Router({
+        const router = new Router({
             '!/(active|completed)' : filter => {
                 this.setState({ filter });
             }
@@ -65,7 +65,7 @@ export default class extends StatefulComponent {
             }
         });
 
-        this.router.init('/');
+        router.init('/');
 
         todosModel.onUpdate(todos => {
             this.setState({ todos });

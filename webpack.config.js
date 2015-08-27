@@ -1,3 +1,11 @@
+var jsLoaders = ['babel'];
+
+if(process.env.NODE_ENV === 'production') {
+    jsLoaders.push(
+        'transform?envify'
+    );
+}
+
 module.exports = {
     entry : './js/app.js',
     output : {
@@ -6,7 +14,7 @@ module.exports = {
     },
     module : {
         loaders: [
-            { test : /\.js$/, loader : 'babel' }
+            { test : /\.js$/, loaders : jsLoaders }
         ]
     }
 };

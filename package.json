@@ -16,12 +16,14 @@
     "babel-core": "5.8.22",
     "babel-loader": "5.3.2",
     "envify": "3.4.0",
+    "transform-loader": "0.2.2",
     "webpack": "1.12.0",
     "webpack-dev-server": "1.10.1"
   },
   "license": "MIT",
   "scripts": {
-    "dev-server": "webpack-dev-server --progress --colors --port 3000"
+    "dev-server": "webpack-dev-server --progress --colors --port 3000",
+    "build-bundle" : "NODE_ENV=production webpack --optimize-minimize"
   },
   "dependencies": {
     "director": "^1.2.8",
