@@ -16,8 +16,8 @@ export default class Footer extends Component {
                                 <li>
                                     <a
                                         class={ item === filter? 'selected' : null }
-                                        href={' #!/' + (item !== 'all'? item : '') }>
-                                        {item}
+                                        href={ '#!/' + (item !== 'all'? item : '') }>
+                                        { item }
                                     </a>
                                 </li>
                             );
