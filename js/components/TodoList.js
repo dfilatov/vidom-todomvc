@@ -1,20 +1,22 @@
-import { Component, node } from 'vidom';
+import { Component } from 'vidom';
 import TodoItem from './TodoItem';
 
 export default class TodoList extends Component {
     onRender({ todos, filter, onRemove, onEdit, onToggle }) {
-        return node('ul')
-            .attrs({ className : 'todo-list' })
-            .children((filter === 'all'?
-                todos :
-                todos.filter(todo => todo.completed === (filter === 'completed')))
-                    .map(todo => node(TodoItem)
-                        .key(todo.id)
-                        .attrs({
-                            todo,
-                            onRemove : () => onRemove(todo.id),
-                            onEdit : (title) => onEdit(todo.id, title),
-                            onToggle : () => onToggle(todo.id)
-                    })));
+        return (
+            <li class="todo-list">
+                { (filter === 'all'?
+                    todos :
+                    todos.filter(todo => todo.completed === (filter === 'completed')))
+                        .map(todo =>
+                            <TodoItem
+                                key={todo.id}
+                                todo={todo}
+                                onRemove={ () => onRemove(todo.id) }
+                                onEdit={ title => onEdit(todo.id, title) }
+                                onToggle={ () => onToggle(todo.id) }/>)
+                }
+            </li>
+        );
     }
 }

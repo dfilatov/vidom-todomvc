@@ -1,4 +1,3 @@
-import { node } from 'vidom';
 import StatefulComponent from './Stateful';
 
 const ENTER_KEY = 13;
@@ -9,22 +8,17 @@ export default class Header extends StatefulComponent {
     }
 
     onRender() {
-        return node('header')
-            .attrs({ className : 'header' })
-            .children([
-                node('h1')
-                    .key('header')
-                    .children('todos'),
-                node('input')
-                    .key('input')
-                    .attrs({
-                        className : 'new-todo',
-                        placeholder : 'What needs to be done?',
-                        autofocus : true,
-                        value : this.getState().title,
-                        onKeyUp : e => this.onKeyUp(e)
-                    })
-            ]);
+        return (
+            <header class="header">
+                <h1>todos</h1>
+                <input
+                    class="new-todo"
+                    placeholder="What needs to be done?"
+                    autofocus="true"
+                    value={ this.getState().title }
+                    onKeyUp={ e => this.onKeyUp(e) }/>
+            </header>
+        );
     }
 
     onKeyUp(e) {

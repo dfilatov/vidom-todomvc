@@ -1,4 +1,3 @@
-import { node } from 'vidom';
 import StatefulComponent from './Stateful';
 import Header from './Header';
 import Main from './Main';
@@ -22,36 +21,33 @@ export default class extends StatefulComponent {
             return null;
         }
 
-        const children = [node(Header)
-            .key('header')
-            .attrs({ onAdd : title => todosModel.add(title) })
-        ];
-
-        if(todos.length) {
-            children.push(
-                node(Main).key('main').attrs({
-                    todos,
-                    filter,
-                    onRemove : id => todosModel.remove(id),
-                    onEdit : (id, title) => todosModel.setTitle(id, title),
-                    onToggle : id => todosModel.toggleCompleted(id),
-                    onCompleteAll : () => todosModel.completeAll(),
-                    onUncompleteAll : () => todosModel.uncompleteAll()
-                }),
-                node(Footer).key('footer').attrs({
-                    todos,
-                    filter,
-                    onRemoveCompleted : () => todosModel.removeCompleted()
-                }));
-        }
-
-        return node('div').children([
-            node('section')
-                .key('todoapp')
-                .attrs({ className : 'todoapp' })
-                .children(children),
-            node(Info).key('info')
-        ]);
+        return (
+            <div>
+                <section class="todoapp">
+                    <Header onAdd={ title => todosModel.add(title) }/>
+                    { todos.length?
+                        <Main
+                            todos={ todos }
+                            filter={ filter }
+                            onRemove={ id => todosModel.remove(id) }
+                            onEdit={ (id, title) => todosModel.setTitle(id, title) }
+                            onToggle={ id => todosModel.toggleCompleted(id) }
+                            onCompleteAll={ () => todosModel.completeAll() }
+                            onUncompleteAll={ () => todosModel.uncompleteAll() }/> :
+                        ''
+                    }
+                    { todos.length?
+                        <Footer
+                            todos={ todos }
+                            filter={ filter }
+                            onRemoveCompleted={ () => todosModel.removeCompleted() }/>
+                        :
+                        ''
+                    }
+                </section>
+                <Info/>
+            </div>
+        );
     }
 
     onMount() {

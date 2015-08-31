@@ -1,4 +1,4 @@
-var jsLoaders = ['babel'];
+var jsLoaders = ['babel?plugins=babel-plugin-vidom-jsx'];
 
 if(process.env.NODE_ENV === 'production') {
     jsLoaders.push(

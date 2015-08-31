@@ -1,4 +1,3 @@
-import { node } from 'vidom';
 import StatefulComponent from './Stateful';
 
 const ENTER_KEY = 13;
@@ -14,43 +13,23 @@ export default class TodoItem extends StatefulComponent {
     onRender({ todo : { title, completed }, onRemove, onEdit, onToggle }) {
         const { mode, editTitle } = this.getState();
 
-        return node('li')
-            .attrs({
-                className : [
-                    completed? 'completed' : '',
-                    mode === 'edit'? 'editing' : ''
-                ].join(' ')
-            })
-            .children(
-                mode === 'view'?
-                    node('div')
-                        .attrs({ className : 'view' })
-                        .children([
-                            node('input')
-                                .key('input')
-                                .attrs({
-                                    type : 'checkbox',
-                                    className : 'toggle',
-                                    checked : completed,
-                                    onClick : onToggle
-                                }),
-                            node('label')
-                                .key('label')
-                                .attrs({ onDblClick : () => this.onDblClick() })
-                                .children(title),
-                            node('button')
-                                .key('button')
-                                .attrs({
-                                    className : 'destroy',
-                                    onClick : onRemove
-                                })
-                        ]) :
-                    this.setDomRef('edit-input', node('input').attrs({
-                        className : 'edit',
-                        value : editTitle,
-                        onKeyUp : e => this.onKeyUp(e),
-                        onBlur : e => this.onBlur(e)
-                    })));
+        return (
+            <li class={ [completed? 'completed' : '', mode === 'edit'? 'editing' : ''].join(' ') }>
+                { mode === 'view'?
+                    <div class="view">
+                        <input type="checkbox" class="toggle" checked={ completed } onClick={ onToggle }/>
+                        <label onDblClick={ () => this.onDblClick() }>{ title }</label>
+                        <button class="destroy" onClick={ onRemove }/>
+                    </div> :
+                    <input
+                        dom-ref="edit-input"
+                        class="edit"
+                        value={ editTitle }
+                        onKeyUp={ e => this.onKeyUp(e) }
+                        onBlur={ e => this.onBlur(e) }/>
+                }
+            </li>
+        );
     }
 
     onUpdate() {
