@@ -10,6 +10,14 @@ export default class TodoItem extends StatefulComponent {
         };
     }
 
+    // demonstrates optimization to prevent redundant ops
+    shouldUpdate({ todo : nextTodo }, { todo : prevTodo }) {
+        const prevState = this.getPrevState(),
+            state = this.getState();
+
+        return nextTodo !== prevTodo || prevState.mode !== state.mode;
+    }
+
     onRender({ todo : { title, completed }, onRemove, onEdit, onToggle }) {
         const { mode, editTitle } = this.getState();
 
