@@ -13,7 +13,9 @@ export default class StatefulComponent extends Component {
     setState(state) {
         this._prevState = this._state;
         this._state = { ...this._state, ...state };
-        this.update();
+        this.update(function() {
+            this._prevState = this._state;
+        });
     }
 
     getState() {
