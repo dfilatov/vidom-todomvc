@@ -16,23 +16,23 @@ export default class Header extends StatefulComponent {
                     placeholder="What needs to be done?"
                     autofocus="true"
                     value={ this.getState().title }
+                    onChange={ e => this.onChange(e) }
                     onKeyUp={ e => this.onKeyUp(e) }/>
             </header>
         );
     }
 
-    onKeyUp(e) {
-        let value = e.target.value;
+    onChange(e) {
+        this.setState({ title : e.target.value });
+    }
 
+    onKeyUp(e) {
         if(e.nativeEvent.keyCode === ENTER_KEY) {
-            value = value.trim();
+            const value = e.target.value.trim();
             if(value) {
                 this.setState({ title : '' });
                 this.getAttrs().onAdd(value);
             }
-        }
-        else {
-            this.setState({ title : value });
         }
     }
 }

@@ -15,7 +15,9 @@ export default class TodoItem extends StatefulComponent {
         const prevState = this.getPrevState(),
             state = this.getState();
 
-        return nextTodo !== prevTodo || prevState.mode !== state.mode;
+        return nextTodo !== prevTodo ||
+            prevState.mode !== state.mode ||
+            prevState.editTitle !== state.editTitle;
     }
 
     onRender({ todo : { title, completed }, onRemove, onEdit, onToggle }) {
@@ -25,7 +27,7 @@ export default class TodoItem extends StatefulComponent {
             <li class={ [completed? 'completed' : '', mode === 'edit'? 'editing' : ''].join(' ') }>
                 { mode === 'view'?
                     <div class="view">
-                        <input type="checkbox" class="toggle" checked={ completed } onClick={ onToggle }/>
+                        <input type="checkbox" class="toggle" checked={ completed } onChange={ onToggle }/>
                         <label onDblClick={ () => this.onDblClick() }>{ title }</label>
                         <button class="destroy" onClick={ onRemove }/>
                     </div> :
@@ -33,6 +35,7 @@ export default class TodoItem extends StatefulComponent {
                         dom-ref="edit-input"
                         class="edit"
                         value={ editTitle }
+                        onChange={ e => this.onChange(e) }
                         onKeyUp={ e => this.onKeyUp(e) }
                         onBlur={ e => this.onBlur(e) }/>
                 }
@@ -50,14 +53,13 @@ export default class TodoItem extends StatefulComponent {
         this.setState({ mode : 'edit' });
     }
 
-    onKeyUp(e) {
-        let value = e.target.value;
+    onChange(e) {
+        this.setState({ editTitle : e.target.value });
+    }
 
+    onKeyUp(e) {
         if(e.nativeEvent.keyCode === ENTER_KEY) {
             e.target.blur();
-        }
-        else {
-            this.setState({ editTitle : value });
         }
     }
 
