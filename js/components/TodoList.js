@@ -4,7 +4,7 @@ import TodoItem from './TodoItem';
 export default class TodoList extends Component {
     onRender({ todos, filter, onRemove, onEdit, onToggle }) {
         return (
-            <li class="todo-list">
+            <ul class="todo-list">
                 { (filter === 'all'?
                     todos :
                     todos.filter(todo => todo.completed === (filter === 'completed')))
@@ -16,7 +16,7 @@ export default class TodoList extends Component {
                                 onEdit={ title => onEdit(todo.id, title) }
                                 onToggle={ () => onToggle(todo.id) }/>)
                 }
-            </li>
+            </ul>
         );
     }
 }
