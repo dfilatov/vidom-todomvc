@@ -25,13 +25,13 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev-server": "webpack-dev-server --progress --colors --port 3000",
+    "start": "webpack-dev-server --progress --colors --port 3000",
     "deploy": "./update-gh-pages.sh"
   },
   "dependencies": {
     "director": "^1.2.8",
     "todomvc-app-css": "^2.0.0",
     "todomvc-common": "^1.0.1",
-    "vidom": "0.0.64"
+    "vidom": "0.0.66"
   }
 }
