@@ -1,9 +1,7 @@
 var jsLoaders = ['babel'];
 
 if(process.env.NODE_ENV === 'production') {
-    jsLoaders.push(
-        'transform?envify'
-    );
+    jsLoaders.push('transform?envify');
 }
 
 module.exports = {
