@@ -1,9 +1,9 @@
-import StatefulComponent from './Stateful';
+import { Component } from 'vidom';
 
 const ENTER_KEY = 13;
 
-export default class TodoItem extends StatefulComponent {
-    getInitialState({ todo : { title } }) {
+export default class TodoItem extends Component {
+    onInitialStateRequest({ todo : { title } }) {
         return {
             mode : 'view',
             editTitle : title

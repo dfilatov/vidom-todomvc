@@ -1,9 +1,9 @@
-import StatefulComponent from './Stateful';
+import { Component } from 'vidom';
 
 const ENTER_KEY = 13;
 
-export default class Header extends StatefulComponent {
-    getInitialState() {
+export default class Header extends Component {
+    onInitialStateRequest() {
         return { title : '' };
     }
 

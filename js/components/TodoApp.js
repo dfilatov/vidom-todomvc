@@ -1,4 +1,4 @@
-import StatefulComponent from './Stateful';
+import { Component } from 'vidom';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -6,8 +6,8 @@ import Info from './Info';
 import todosModel from '../models/todos';
 import { Router } from 'Director';
 
-export default class extends StatefulComponent {
-    getInitialState() {
+export default class extends Component {
+    onInitialStateRequest() {
         return {
             todos : todosModel.get(),
             filter : undefined
