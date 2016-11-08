@@ -7,7 +7,7 @@ export default class Footer extends Component {
         return (
             <footer class="footer">
                 <span class="todo-count">
-                    <strong>{ uncompletedTodos.length }</strong> item left
+                    <strong>{ uncompletedTodos.length }</strong> items left
                 </span>
                 <ul class="filters">
                     {
