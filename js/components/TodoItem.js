@@ -3,11 +3,11 @@ import { Component } from 'vidom';
 const ENTER_KEY = 13;
 
 export default class TodoItem extends Component {
-    onInitialStateRequest({ todo : { title } }) {
-        return {
+    onInit({ todo : { title } }) {
+        this.setState({
             mode : 'view',
             editTitle : title
-        };
+        });
     }
 
     // demonstrates optimization to prevent redundant ops

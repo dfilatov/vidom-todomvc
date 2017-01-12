@@ -3,8 +3,8 @@ import { Component } from 'vidom';
 const ENTER_KEY = 13;
 
 export default class Header extends Component {
-    onInitialStateRequest() {
-        return { title : '' };
+    onInit() {
+        this.setState({ title : '' });
     }
 
     onRender() {

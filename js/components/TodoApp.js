@@ -7,11 +7,11 @@ import todosModel from '../models/todos';
 import { Router } from 'Director';
 
 export default class extends Component {
-    onInitialStateRequest() {
-        return {
+    onInit() {
+        this.setState({
             todos : todosModel.get(),
             filter : undefined
-        };
+        });
     }
 
     onRender() {
