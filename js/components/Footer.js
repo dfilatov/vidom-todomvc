@@ -1,8 +1,9 @@
 import { Component } from 'vidom';
 
 export default class Footer extends Component {
-    onRender({ todos, filter, onRemoveCompleted }) {
-        const uncompletedTodos = todos.filter(item => !item.completed);
+    onRender() {
+        const { todos, filter, onRemoveCompleted } = this.attrs,
+            uncompletedTodos = todos.filter(item => !item.completed);
 
         return (
             <footer class="footer">

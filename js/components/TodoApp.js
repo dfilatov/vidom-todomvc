@@ -15,7 +15,7 @@ export default class extends Component {
     }
 
     onRender() {
-        const { todos, filter } = this.getState();
+        const { todos, filter } = this.state;
 
         if(!filter) {
             return null;

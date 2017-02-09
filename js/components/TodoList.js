@@ -2,7 +2,9 @@ import { Component } from 'vidom';
 import TodoItem from './TodoItem';
 
 export default class TodoList extends Component {
-    onRender({ todos, filter, onRemove, onEdit, onToggle }) {
+    onRender() {
+        const { todos, filter, onRemove, onEdit, onToggle } = this.attrs;
+
         return (
             <ul class="todo-list">
                 { (filter === 'all'?

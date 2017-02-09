@@ -15,7 +15,7 @@ export default class Header extends Component {
                     class="new-todo"
                     placeholder="What needs to be done?"
                     autofocus="true"
-                    value={ this.getState().title }
+                    value={ this.state.title }
                     onChange={ e => this.onChange(e) }
                     onKeyUp={ e => this.onKeyUp(e) }/>
             </header>
@@ -31,7 +31,7 @@ export default class Header extends Component {
             const value = e.target.value.trim();
             if(value) {
                 this.setState({ title : '' });
-                this.getAttrs().onAdd(value);
+                this.attrs.onAdd(value);
             }
         }
     }

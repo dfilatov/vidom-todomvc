@@ -3,25 +3,27 @@ import { Component } from 'vidom';
 const ENTER_KEY = 13;
 
 export default class TodoItem extends Component {
-    onInit({ todo : { title } }) {
+    onInit() {
+        this._inputRef = null;
+
         this.setState({
             mode : 'view',
-            editTitle : title
+            editTitle : this.attrs.todo.title
         });
     }
 
     // demonstrates optimization to prevent redundant ops
-    shouldUpdate({ todo : nextTodo }, { todo : prevTodo }) {
-        const prevState = this.getPrevState(),
-            state = this.getState();
+    shouldUpdate(prevAttrs, _, prevState) {
+        const { state } = this;
 
-        return nextTodo !== prevTodo ||
+        return prevAttrs.todo !== state.todo ||
             prevState.mode !== state.mode ||
             prevState.editTitle !== state.editTitle;
     }
 
-    onRender({ todo : { title, completed }, onRemove, onEdit, onToggle }) {
-        const { mode, editTitle } = this.getState();
+    onRender() {
+        const { todo : { title, completed }, onRemove, onToggle } = this.attrs,
+            { mode, editTitle } = this.state;
 
         return (
             <li class={ [completed? 'completed' : '', mode === 'edit'? 'editing' : ''].join(' ') }>
@@ -32,7 +34,7 @@ export default class TodoItem extends Component {
                         <button class="destroy" onClick={ onRemove }/>
                     </div> :
                     <input
-                        dom-ref="edit-input"
+                        ref={ ref => { this._inputRef = ref } }
                         class="edit"
                         value={ editTitle }
                         onChange={ e => this.onChange(e) }
@@ -44,8 +46,8 @@ export default class TodoItem extends Component {
     }
 
     onUpdate() {
-        if(this.getState().mode === 'edit') {
-            this.getDomRef('edit-input').focus();
+        if(this.state.mode === 'edit') {
+            this._inputRef.focus();
         }
     }
 
@@ -67,10 +69,10 @@ export default class TodoItem extends Component {
         const value = e.target.value.trim();
 
         if(value) {
-            this.getAttrs().onEdit(value);
+            this.attrs.onEdit(value);
         }
         else {
-            this.getAttrs().onRemove();
+            this.attrs.onRemove();
         }
 
         this.setState({ mode : 'view', editTitle : value });
