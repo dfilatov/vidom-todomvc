@@ -24,8 +24,8 @@
     "envify": "3.4.0",
     "style-loader": "^0.12.3",
     "transform-loader": "0.2.3",
-    "webpack": "1.12.0",
-    "webpack-dev-server": "1.10.1"
+    "webpack": "1.14.0",
+    "webpack-dev-server": "1.16.2"
   },
   "license": "MIT",
   "scripts": {
