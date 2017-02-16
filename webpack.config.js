@@ -1,8 +1,4 @@
-var jsLoaders = ['babel'];
-
-if(process.env.NODE_ENV === 'production') {
-    jsLoaders.push('transform?envify');
-}
+var webpack = require('webpack');
 
 module.exports = {
     entry : './js/app.js',
@@ -12,8 +8,13 @@ module.exports = {
     },
     module : {
         loaders: [
-            { test : /\.js$/, loaders : jsLoaders },
+            { test : /\.js$/, loader : 'babel' },
             { test: /\.css$/, loaders : ['style', 'css'] }
         ]
-    }
+    },
+    plugins : [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`
+        })
+    ]
 };
