@@ -1,7 +1,7 @@
 import { Component } from 'vidom';
 
 export default class Info extends Component {
-    shouldUpdate() {
+    shouldRerender() {
         return false;
     }
 

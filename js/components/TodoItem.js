@@ -13,7 +13,7 @@ export default class TodoItem extends Component {
     }
 
     // demonstrates optimization to prevent redundant ops
-    shouldUpdate(prevAttrs, _, prevState) {
+    shouldRerender(prevAttrs, _, prevState) {
         const { state } = this;
 
         return prevAttrs.todo !== state.todo ||
