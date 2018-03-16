@@ -17,7 +17,8 @@ export default class Footer extends Component {
                                 <li>
                                     <a
                                         class={ item === filter? 'selected' : null }
-                                        href={ '#!/' + (item !== 'all'? item : '') }>
+                                        href={ '#!/' + (item !== 'all'? item : '') }
+                                    >
                                         { item }
                                     </a>
                                 </li>
@@ -25,10 +26,9 @@ export default class Footer extends Component {
                         })
                     }
                 </ul>
-                {
-                    uncompletedTodos.length < todos.length?
-                        <button class="clear-completed" onClick={ onRemoveCompleted }>Clear completed</button> :
-                        ''
+                { uncompletedTodos.length < todos.length?
+                    <button class="clear-completed" onClick={ onRemoveCompleted }>Clear completed</button> :
+                    ''
                 }
             </footer>
         );

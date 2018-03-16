@@ -30,16 +30,17 @@ export default class TodoItem extends Component {
                 { mode === 'view'?
                     <div class="view">
                         <input type="checkbox" class="toggle" checked={ completed } onChange={ onToggle }/>
-                        <label onDblClick={ () => this.onDblClick() }>{ title }</label>
+                        <label onDblClick={ () => this.onLabelDblClick() }>{ title }</label>
                         <button class="destroy" onClick={ onRemove }/>
                     </div> :
                     <input
                         ref={ ref => { this._inputRef = ref } }
                         class="edit"
                         value={ editTitle }
-                        onChange={ e => this.onChange(e) }
-                        onKeyUp={ e => this.onKeyUp(e) }
-                        onBlur={ e => this.onBlur(e) }/>
+                        onChange={ e => this.onInputChange(e) }
+                        onKeyUp={ e => this.onInputKeyUp(e) }
+                        onBlur={ e => this.onInputBlur(e) }
+                    />
                 }
             </li>
         );
@@ -51,21 +52,21 @@ export default class TodoItem extends Component {
         }
     }
 
-    onDblClick() {
+    onLabelDblClick() {
         this.setState({ mode : 'edit' });
     }
 
-    onChange(e) {
+    onInputChange(e) {
         this.setState({ editTitle : e.target.value });
     }
 
-    onKeyUp(e) {
+    onInputKeyUp(e) {
         if(e.nativeEvent.keyCode === ENTER_KEY) {
             e.target.blur();
         }
     }
 
-    onBlur(e) {
+    onInputBlur(e) {
         const value = e.target.value.trim();
 
         if(value) {

@@ -16,19 +16,21 @@ export default class Header extends Component {
                     placeholder="What needs to be done?"
                     autofocus="true"
                     value={ this.state.title }
-                    onChange={ e => this.onChange(e) }
-                    onKeyUp={ e => this.onKeyUp(e) }/>
+                    onChange={ e => this.onInputChange(e) }
+                    onKeyUp={ e => this.onInputKeyUp(e) }
+                />
             </header>
         );
     }
 
-    onChange(e) {
+    onInputChange(e) {
         this.setState({ title : e.target.value });
     }
 
-    onKeyUp(e) {
+    onInputKeyUp(e) {
         if(e.nativeEvent.keyCode === ENTER_KEY) {
             const value = e.target.value.trim();
+
             if(value) {
                 this.setState({ title : '' });
                 this.attrs.onAdd(value);
